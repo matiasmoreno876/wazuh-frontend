@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from '../assets/images/wazuh_logo.svg'; // Tell webpack this JS file uses this image
+import logo from '../assets/images/wazuh_logo.svg';
+import {Link} from "react-router-dom";
 
 
 const Header = () => {
@@ -12,17 +13,17 @@ const Header = () => {
                 </a>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="#">Alerts<span className="sr-only">(current)</span></a>
+                        <li className="nav-item">
+                            <Link className="nav-link" to={'/alerts'}>Alerts<span className="sr-only">(current)</span></Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Agents</a>
+                            <Link className="nav-link" to={'/agents'}>Agents</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Rules</a>
+                            <Link className="nav-link" to={'/rules'}>Rules</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link disabled" href="#">Dashboard</a>
+                            <Link className="nav-link" to={'/dashboard'}>Dashboard</Link>
                         </li>
                     </ul>
                 </div>
