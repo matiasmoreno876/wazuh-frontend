@@ -14,7 +14,7 @@ export function getAlertsAction() {
     return async (dispatch) => {
         dispatch(getAlerts());
         try {
-            const response = await clientAxios.get('/alerts?offset=0&limit=15');
+            const response = await clientAxios.get('/alerts?offset=0&limit=10');
             dispatch(getAlertsSuccess(response.data))
         } catch (error) {
             dispatch(getAlertsError())
