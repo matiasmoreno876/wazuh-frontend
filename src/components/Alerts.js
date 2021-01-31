@@ -1,6 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+
+import {getAlertsAction} from "../actions/alertsActions";
+import Alert from "./Alert";
 
 const Alerts = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const getAlerts = () => dispatch(getAlertsAction());
+        getAlerts();
+    }, [])
+    const alerts = useSelector(state => state.alerts.alerts);
+    console.log(alerts)
     return (
         <div>
             <h1 className="mt-4 mb-3 text-center">List of Alerts</h1>
@@ -14,24 +27,10 @@ const Alerts = () => {
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                {alerts.length !== 0 && alerts.data.map(alert => (
+                    <Alert key={alert._id} alert={alert}/>
+                ))
+                }
                 </tbody>
             </table>
 
