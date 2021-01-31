@@ -24,6 +24,7 @@ const Alerts = () => {
                     <th scope="col">TYPE</th>
                     <th scope="col">INDEX</th>
                     <th scope="col">SCORE</th>
+                    <th scope="col">ACCIONS</th>
                 </tr>
                 </thead>
                 <tbody>
