@@ -36,3 +36,30 @@ const getAlertsError = () => ({
     type: ALERTS_ERROR,
     payload: true
 })
+
+export function getAlertAction(id) {
+    return async (dispatch) => {
+        dispatch(getAlert());
+        try {
+            const response = await clientAxios.get(`/alerts?offset=0&limit=10&id=${id}`);
+            dispatch(getAlertSuccess(response.data))
+        } catch (error) {
+            dispatch(getAlertError())
+        }
+    }
+}
+
+const getAlert = () => ({
+    type: ALERT_BY_ID_REQUEST,
+    payload: true
+})
+
+const getAlertSuccess = alerts => ({
+    type: ALERT_BY_ID_SUCCESS,
+    payload: alerts
+})
+
+const getAlertError = () => ({
+    type: ALERT_BY_ID_ERROR,
+    payload: true
+})

@@ -11,11 +11,13 @@ import {
 const initialState = {
     alerts: [],
     error: null,
-    loading: false
+    loading: false,
+    alert: {}
 }
 
 export default function (state = initialState, action) {
     switch (action.type) {
+        case ALERT_BY_ID_REQUEST:
         case ALERTS_REQUEST:
             return {
                 ...state,
@@ -28,6 +30,14 @@ export default function (state = initialState, action) {
                 error: null,
                 alerts: action.payload
             }
+        case ALERT_BY_ID_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                alert: action.payload
+            }
+        case ALERT_BY_ID_ERROR:
         case ALERTS_ERROR:
             return {
                 ...state,
