@@ -6,7 +6,7 @@ import {getRuleAction} from "../actions/rulesActions";
 const RulesDetail = (props) => {
     const dispatch = useDispatch();
 
-    const id = '554';
+    const id = props.match.params.id;
 
     useEffect(() => {
         const getRule = id => dispatch(getRuleAction(id));
