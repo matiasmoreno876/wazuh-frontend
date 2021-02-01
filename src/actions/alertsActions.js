@@ -56,7 +56,7 @@ const getAlert = () => ({
 
 const getAlertSuccess = alerts => ({
     type: ALERT_BY_ID_SUCCESS,
-    payload: alerts
+    payload: alerts.data[0]
 })
 
 const getAlertError = () => ({
