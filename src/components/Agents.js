@@ -8,9 +8,12 @@ const Agents = () => {
 
     const dispatch = useDispatch();
 
+    let offset = 0;
+    let limit = 10;
+
     useEffect(() => {
-        const getAgents = () => dispatch(getAgentsAction());
-        getAgents();
+        const getAgents = (offset, limit) => dispatch(getAgentsAction(offset, limit));
+        getAgents(offset, limit);
     }, [])
 
     const agents = useSelector(state => state.agents.agents);
@@ -24,7 +27,7 @@ const Agents = () => {
                 <table className="table table-hover mb-4">
                     <thead className="thead-dark">
                     <tr>
-                        <th  scope="col">ID</th>
+                        <th scope="col">ID</th>
                         <th className="text-center" scope="col">NAME</th>
                         <th className="text-center" scope="col">IP</th>
                         <th className="text-center" scope="col">ACTIONS</th>

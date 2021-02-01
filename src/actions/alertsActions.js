@@ -10,11 +10,11 @@ import {
 import clientAxios from "../config/axios";
 
 //
-export function getAlertsAction() {
+export function getAlertsAction(offset, limit) {
     return async (dispatch) => {
         dispatch(getAlerts());
         try {
-            const response = await clientAxios.get('/alerts?offset=0&limit=10');
+            const response = await clientAxios.get(`/alerts?offset=${offset}&limit=${limit}`);
             dispatch(getAlertsSuccess(response.data))
         } catch (error) {
             dispatch(getAlertsError())

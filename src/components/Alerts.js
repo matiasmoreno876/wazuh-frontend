@@ -8,9 +8,12 @@ const Alerts = () => {
 
     const dispatch = useDispatch();
 
+    let offset = 0;
+    let limit = 10;
+
     useEffect(() => {
-        const getAlerts = () => dispatch(getAlertsAction());
-        getAlerts();
+        const getAlerts = (offset, limit) => dispatch(getAlertsAction(offset, limit));
+        getAlerts(offset, limit);
     }, [])
 
     const alerts = useSelector(state => state.alerts.alerts);

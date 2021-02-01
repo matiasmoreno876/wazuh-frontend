@@ -6,9 +6,12 @@ import {getAgentsAction} from "../actions/agentsActions";
 const Dashboard = () => {
     const dispatch = useDispatch();
 
+    let offset = 0;
+    let limit = 100;
+
     useEffect(() => {
-        const getAgents = () => dispatch(getAgentsAction());
-        getAgents();
+        const getAgents = (offset, limit) => dispatch(getAgentsAction(offset,limit));
+        getAgents(offset,limit);
     }, [])
 
     const agents = useSelector(state => state.agents.agents);

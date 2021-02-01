@@ -10,11 +10,11 @@ import {
 import clientAxios from "../config/axios";
 
 //
-export function getAgentsAction() {
+export function getAgentsAction(offset, limit) {
     return async (dispatch) => {
         dispatch(getAgents());
         try {
-            const response = await clientAxios.get('/agents?offset=0&limit=10');
+            const response = await clientAxios.get(`/agents?offset=${offset}&limit=${limit}`);
             dispatch(getAgentsSuccess(response.data))
         } catch (error) {
             dispatch(getAgentsError())

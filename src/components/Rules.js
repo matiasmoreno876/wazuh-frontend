@@ -8,9 +8,12 @@ const Rules = () => {
 
     const dispatch = useDispatch();
 
+    let offset = 0;
+    let limit = 10;
+
     useEffect(() => {
-        const getRules = () => dispatch(getRulesAction());
-        getRules();
+        const getRules = (offset, limit) => dispatch(getRulesAction(offset, limit));
+        getRules(offset, limit);
     }, [])
 
     const rules = useSelector(state => state.rules.rules);

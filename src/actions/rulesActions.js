@@ -10,11 +10,11 @@ import {
 import clientAxios from "../config/axios";
 
 //
-export function getRulesAction() {
+export function getRulesAction(offset, limit) {
     return async (dispatch) => {
         dispatch(getRules());
         try {
-            const response = await clientAxios.get('/rules?offset=0&limit=10');
+            const response = await clientAxios.get(`/rules?offset=${offset}&limit=${limit}`);
             dispatch(getRulesSuccess(response.data))
         } catch (error) {
             dispatch(getRulesError())
