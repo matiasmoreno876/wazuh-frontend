@@ -1,6 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Alerts from "./components/Alerts";
 import Agents from "./components/Agents";
@@ -19,7 +20,7 @@ function App() {
         <Router>
             <Provider store={store}>
                 <Header/>
-                <div className="container">
+                <div className="container mb-5 pb-5">
                     <Switch>
                         <Route exact path="/alerts" component={Alerts}/>
                         <Route exact path="/alerts/:id" component={AlertsDetail}/>
@@ -31,6 +32,7 @@ function App() {
                     </Switch>
                 </div>
             </Provider>
+            <Footer/>
         </Router>
     );
 }

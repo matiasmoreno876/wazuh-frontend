@@ -1,0 +1,15 @@
+.footer-color {
+    background-color: #f7f7f7 !important;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #6c757d !important;
+    text-align: center;
+    font-size: 12px;
+}
+
+.link-color {
+    font-weight: 500;
+    color: #495057
+}
