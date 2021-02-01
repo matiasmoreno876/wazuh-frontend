@@ -11,6 +11,7 @@ import AlertsDetail from "./components/AlertsDetail";
 //Redux
 import {Provider} from 'react-redux';
 import store from "./store";
+import RulesDetail from "./components/RulesDetail";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                         <Route exact path="/alerts/:id" component={AlertsDetail}/>
                         <Route exact path="/agents" component={Agents}/>
                         <Route exact path="/rules" component={Rules}/>
+                        <Route exact path="/rules/:id" component={RulesDetail}/>
                         <Route exact path="/dashboard" component={Dashboard}/>
                     </Switch>
                 </div>
