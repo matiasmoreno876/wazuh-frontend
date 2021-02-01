@@ -19,12 +19,11 @@ const AlertsDetail = (props) => {
 
     console.log(alert)
 
-
     return (
         <div className="container-fluid">
             <div className="row d-flex justify-content-center mt-5">
                 <div className="col-sm-12">
-                    <div className="card">
+                    { alert._source && <div className="card">
                         <div className="card-body">
                             <h3 className="card-title">Detail of the alert: {alert._id}</h3>
                             <hr/>
@@ -48,7 +47,7 @@ const AlertsDetail = (props) => {
                             </div>
                             <Link to={'/alerts'} className="btn btn-primary btn-block">Back to list</Link>
                         </div>
-                    </div>
+                    </div>}
                 </div>
             </div>
         </div>
