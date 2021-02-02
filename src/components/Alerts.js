@@ -22,16 +22,16 @@ const Alerts = () => {
 
     return (
         <div>
-            <h1 className="mt-4 mb-3 text-center">List of Alerts</h1>
+            <h1 className="mt-4 mb-3 text-center" data-cy="title">List of Alerts</h1>
             {!error && <Fragment>
-                <table className="table table-hover mb-4">
+                <table data-cy="table" className="table table-hover mb-4">
                     <thead className="thead-dark">
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">TYPE</th>
-                        <th scope="col">INDEX</th>
-                        <th scope="col">SCORE</th>
-                        <th scope="col">ACTIONS</th>
+                        <th data-cy="col-1" scope="col">ID</th>
+                        <th data-cy="col-2" scope="col">TYPE</th>
+                        <th data-cy="col-3" scope="col">INDEX</th>
+                        <th data-cy="col-4" scope="col">SCORE</th>
+                        <th data-cy="col-5" scope="col">ACTIONS</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -42,7 +42,7 @@ const Alerts = () => {
                     </tbody>
                 </table>
 
-                <nav aria-label="Page navigation example">
+                <nav data-cy="pagination" aria-label="Page navigation example">
                     <ul className="pagination">
                         <li className="page-item"><a className="page-link" href="#">Previous</a></li>
                         <li className="page-item"><a className="page-link" href="#">1</a></li>
