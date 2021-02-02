@@ -1,24 +1,29 @@
-import React, {useEffect, Fragment} from 'react';
+import React, {useEffect, Fragment, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 import {getAlertsAction} from "../actions/alertsActions";
 import Alert from "./Alert";
+import Pagination from "./Pagination";
 
 const Alerts = () => {
 
     const dispatch = useDispatch();
 
-    let offset = 0;
-    let limit = 10;
+    const [currentPAge, setCurrentPAge] = useState(0);
+    const [alertsPerPage, setAlertsPerPage] = useState(10)
 
     useEffect(() => {
         const getAlerts = (offset, limit) => dispatch(getAlertsAction(offset, limit));
-        getAlerts(offset, limit);
+        getAlerts(currentPAge, alertsPerPage);
     }, [])
 
     const alerts = useSelector(state => state.alerts.alerts);
     const error = useSelector(state => state.alerts.error);
     const loading = useSelector(state => state.alerts.loading)
+
+    const paginate = (pageNumber) => {
+        dispatch(getAlertsAction(((pageNumber - 1) * alertsPerPage), alertsPerPage))
+    };
 
     return (
         <div>
@@ -42,15 +47,11 @@ const Alerts = () => {
                     </tbody>
                 </table>
 
-                <nav data-cy="pagination" aria-label="Page navigation example">
-                    <ul className="pagination">
-                        <li className="page-item"><a className="page-link" href="#">Previous</a></li>
-                        <li className="page-item"><a className="page-link" href="#">1</a></li>
-                        <li className="page-item"><a className="page-link" href="#">2</a></li>
-                        <li className="page-item"><a className="page-link" href="#">3</a></li>
-                        <li className="page-item"><a className="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
+                {
+                    alerts && alerts.paging &&
+                    <Pagination totalPost={alerts.paging.total_items} postPerPage={alertsPerPage} paginate={paginate}/>
+                }
+
             </Fragment>}
 
             {error &&

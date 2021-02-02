@@ -1,26 +1,29 @@
-import React, {useEffect, Fragment} from 'react';
+import React, {useEffect, Fragment, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 import {getRulesAction} from "../actions/rulesActions";
 import Rule from "./Rule";
+import Pagination from "./Pagination";
 
 const Rules = () => {
 
     const dispatch = useDispatch();
 
-    let offset = 0;
-    let limit = 10;
+    const [currentPAge, setCurrentPAge] = useState(0);
+    const [alertsPerPage, setAlertsPerPage] = useState(10)
 
     useEffect(() => {
         const getRules = (offset, limit) => dispatch(getRulesAction(offset, limit));
-        getRules(offset, limit);
+        getRules(currentPAge, alertsPerPage);
     }, [])
 
     const rules = useSelector(state => state.rules.rules);
     const error = useSelector(state => state.rules.error);
     const loading = useSelector(state => state.rules.loading)
 
-    console.log(rules)
+    const paginate = (pageNumber) => {
+        dispatch(getRulesAction(((pageNumber - 1) * alertsPerPage), alertsPerPage))
+    };
 
     return (
         <div>
@@ -38,21 +41,17 @@ const Rules = () => {
                     </thead>
                     <tbody>
                     {rules.length !== 0 && rules.data.map(rule => (
-                        <Rule key={rule._id} rule={rule}/>
+                        <Rule key={rule.id} rule={rule}/>
                     ))
                     }
                     </tbody>
                 </table>
 
-                <nav aria-label="Page navigation example">
-                    <ul className="pagination">
-                        <li className="page-item"><a className="page-link" href="#">Previous</a></li>
-                        <li className="page-item"><a className="page-link" href="#">1</a></li>
-                        <li className="page-item"><a className="page-link" href="#">2</a></li>
-                        <li className="page-item"><a className="page-link" href="#">3</a></li>
-                        <li className="page-item"><a className="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
+                {
+                    rules && rules.paging &&
+                    <Pagination totalPost={rules.paging.total_items} postPerPage={alertsPerPage} paginate={paginate}/>
+                }
+
             </Fragment>}
 
             {error &&

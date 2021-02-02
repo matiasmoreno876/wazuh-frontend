@@ -1,24 +1,29 @@
-import React, {useEffect, Fragment} from 'react';
+import React, {useEffect, Fragment, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 import {getAgentsAction} from "../actions/agentsActions";
 import Agent from "./Agent";
+import Pagination from "./Pagination";
 
 const Agents = () => {
 
     const dispatch = useDispatch();
 
-    let offset = 0;
-    let limit = 10;
+    const [currentPAge, setCurrentPAge] = useState(0);
+    const [alertsPerPage, setAlertsPerPage] = useState(10)
 
     useEffect(() => {
         const getAgents = (offset, limit) => dispatch(getAgentsAction(offset, limit));
-        getAgents(offset, limit);
+        getAgents(currentPAge, alertsPerPage);
     }, [])
 
     const agents = useSelector(state => state.agents.agents);
     const error = useSelector(state => state.agents.error);
     const loading = useSelector(state => state.agents.loading)
+
+    const paginate = (pageNumber) => {
+        dispatch(getAgentsAction(((pageNumber - 1) * alertsPerPage), alertsPerPage))
+    };
 
     return (
         <div>
@@ -35,21 +40,17 @@ const Agents = () => {
                     </thead>
                     <tbody>
                     {agents.length !== 0 && agents.data.map(agent => (
-                        <Agent key={agent._id} agent={agent}/>
+                        <Agent key={agent.id} agent={agent}/>
                     ))
                     }
                     </tbody>
                 </table>
 
-                <nav aria-label="Page navigation example">
-                    <ul className="pagination">
-                        <li className="page-item"><a className="page-link" href="#">Previous</a></li>
-                        <li className="page-item"><a className="page-link" href="#">1</a></li>
-                        <li className="page-item"><a className="page-link" href="#">2</a></li>
-                        <li className="page-item"><a className="page-link" href="#">3</a></li>
-                        <li className="page-item"><a className="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
+                {
+                    agents && agents.paging &&
+                    <Pagination totalPost={agents.paging.total_items} postPerPage={alertsPerPage} paginate={paginate}/>
+                }
+
             </Fragment>}
 
             {error &&
